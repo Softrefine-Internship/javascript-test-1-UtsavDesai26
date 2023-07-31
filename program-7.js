@@ -15,28 +15,56 @@
 //  { title: 'Python', author: 'Guido' }
 // ]
 
-function removeDuplicate(array) {
-  let result = [];
-  let uniqueObject = {};
+// <-------------- Befor optimized code -------------->
 
-  for (let i = 0; i < array.length; i++) {
-    let uniqueTitle = array[i].title;
-    uniqueObject[uniqueTitle] = array[i];
+// function removeDuplicate(array) {
+//   let result = [];
+//   let uniqueObject = {};
+
+//   for (let i = 0; i < array.length; i++) {
+//     let uniqueTitle = array[i].title;
+//     uniqueObject[uniqueTitle] = array[i];
+//   }
+
+//   for (let key in uniqueObject) {
+//     result.push(uniqueObject[key]);
+//   }
+
+//   return result;
+// }
+
+// array = [
+//   { title: "C++", author: "Bjarne" },
+//   { title: "Java", author: "James" },
+//   { title: "Python", author: "Guido" },
+//   { title: "Java", author: "James" },
+// ];
+
+// const result = removeDuplicate(array);
+// console.log("Expected Output:", result);
+
+// <-------------- After optimized code -------------->
+
+function removeDuplicateObjects(array) {
+  const uniqueObjects = [];
+  const uniqueTitles = new Set();
+
+  for (const obj of array) {
+    if (!uniqueTitles.has(obj.title)) {
+      uniqueTitles.add(obj.title);
+      uniqueObjects.push(obj);
+    }
   }
 
-  for (let key in uniqueObject) {
-    result.push(uniqueObject[key]);
-  }
-
-  return result;
+  return uniqueObjects;
 }
 
-array = [
+const array = [
   { title: "C++", author: "Bjarne" },
   { title: "Java", author: "James" },
   { title: "Python", author: "Guido" },
   { title: "Java", author: "James" },
 ];
 
-const result = removeDuplicate(array);
+const result = removeDuplicateObjects(array);
 console.log("Expected Output:", result);
