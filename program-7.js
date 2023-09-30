@@ -22,7 +22,7 @@
 //   let uniqueObject = {};
 
 //   for (let i = 0; i < array.length; i++) {
-//     let uniqueTitle = array[i].title;
+//     let uniqueTitle = JSON.stringify(array[i]);
 //     uniqueObject[uniqueTitle] = array[i];
 //   }
 
@@ -38,6 +38,9 @@
 //   { title: "Java", author: "James" },
 //   { title: "Python", author: "Guido" },
 //   { title: "Java", author: "James" },
+//   { id: 1, author: [1, 2, 3] },
+//   { id: 1, author: [1, 2, 3] },
+//   { id: 2, author: [1, 2, 3] },
 // ];
 
 // const result = removeDuplicate(array);
@@ -47,11 +50,12 @@
 
 function removeDuplicateObjects(array) {
   const uniqueObjects = [];
-  const uniqueTitles = new Set();
+  const uniqueObject = new Set();
 
   for (const obj of array) {
-    if (!uniqueTitles.has(obj.title)) {
-      uniqueTitles.add(obj.title);
+    const objString = JSON.stringify(obj);
+    if (!uniqueObject.has(objString)) {
+      uniqueObject.add(objString);
       uniqueObjects.push(obj);
     }
   }
@@ -64,6 +68,9 @@ const array = [
   { title: "Java", author: "James" },
   { title: "Python", author: "Guido" },
   { title: "Java", author: "James" },
+  { id: 1, author: [1, 2, 3] },
+  { id: 1, author: [1, 2, 3] },
+  { id: 2, author: [1, 2, 3] },
 ];
 
 const result = removeDuplicateObjects(array);

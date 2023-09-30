@@ -12,7 +12,7 @@
 // console.log(arrClone);
 
 // <-------------- After optimized code -------------->
-let arr = [1, 2, 3];
+let arr = [1, 2, [3, 4]];
 let arrClone = arr.slice();
 
 console.log(arrClone);

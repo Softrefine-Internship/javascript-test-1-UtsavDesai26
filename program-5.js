@@ -26,7 +26,7 @@ Given an integer array flowerbed containing 0's and 1's, where 0 means empty and
 //   return count >= n;
 // }
 
-// let planted = [1, 0, 0, 0, 1];
+// let planted = [1, 0, 0, 0, 0, 0, 1];
 // let n = 2;
 // const result = flowerbed(planted, n);
 // console.log(`Output: ${result}`);
@@ -52,7 +52,7 @@ function canPlaceFlowers(flowerbed, n) {
   return count >= n;
 }
 
-const flowerbed = [1, 0, 0, 0, 1];
-const n = 2;
+const flowerbed = [1, 0, 0, 0, 0, 0, 1, 0, 0];
+const n = 3;
 const result = canPlaceFlowers(flowerbed, n);
 console.log(`Output: ${result}`);

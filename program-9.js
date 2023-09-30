@@ -1,56 +1,62 @@
 // Write a JavaScript program to find the most frequent item in an array.
 
-// Sample input : [3, 'a', 'a', 'a', 2, 3, 'a', 3, 'a', 2, 4, 9, 3];
-// Expected Output : console.log(a, "5 times")
+// Sample imput : [1, 2, 2, 3, 4, 4];
+// Expected Output : console.log(2, "2 times" and 4, "2 times")
 
 // <-------------- Befor optimized code -------------->
 
 // function mostFrequent(array) {
-//   let mostfrequent = 1;
-//   let count = 0;
-//   let item;
-
-//   for (var i = 0; i < array.length; i++) {
-//     for (var j = i; j < array.length; j++) {
-//       if (array[i] == array[j]) {
-//         count++;
-//       }
-//       if (mostfrequent < count) {
-//         mostfrequent = count;
-//         item = array[i];
-//       }
-//     }
-//     count = 0;
+//   if (array.length === 0) {
+//     console.log("Array is empty.");
+//     return;
 //   }
-//   console.log(`${item}, "${mostfrequent} times"`);
-// }
 
-// const inputArray = [3, "a", "a", "a", 2, 3, "a", 3, "a", 2, 4, 9, 3];
-// mostFrequent(inputArray);
+//   let frequencyMap = {};
+//   let maxFrequency = 0;
+//   let mostFrequentItem;
+
+//   for (let i = 0; i < array.length; i++) {
+//     mostFrequentItem = array[i];
+//     if (frequencyMap[mostFrequentItem]) {
+//       frequencyMap[mostFrequentItem]++;
+//     } else {
+//       frequencyMap[mostFrequentItem] = 1;
+//     }
+//     if (frequencyMap[mostFrequentItem] > maxFrequency) {
+//       maxFrequency = frequencyMap[mostFrequentItem];
+//     }
+//   }
+
+//   for (const item in frequencyMap) {
+//     if (frequencyMap[item] === maxFrequency) {
+//       console.log(`${item}, "${maxFrequency} times"`);
+//     }
+//   }
+// }
 
 // <-------------- After optimized code -------------->
 
 function mostFrequent(array) {
   const frequencyMap = new Map();
-
-  for (const item of array) {
-    console.log(frequencyMap.get(item));
-    frequencyMap.set(item, (frequencyMap.get(item) || 0) + 1);
-    console.log(frequencyMap);
-  }
-
   let maxFrequency = 0;
-  let mostFrequentItem;
 
-  frequencyMap.forEach((frequency, item) => {
-    if (frequency > maxFrequency) {
-      maxFrequency = frequency;
-      mostFrequentItem = item;
+  array.forEach((item) => {
+    if (frequencyMap.has(item)) {
+      frequencyMap.set(item, frequencyMap.get(item) + 1);
+    } else {
+      frequencyMap.set(item, 1);
+    }
+    if (frequencyMap.get(item) > maxFrequency) {
+      maxFrequency = frequencyMap.get(item);
     }
   });
 
-  console.log(`${mostFrequentItem}, "${maxFrequency} times"`);
+  frequencyMap.forEach((value, key) => {
+    if (value === maxFrequency) {
+      console.log(`${key}, "${maxFrequency} times"`);
+    }
+  });
 }
 
-const inputArray = [3, "a", "a", "a", 2, 3, "a", 3, "a", 2, 4, 9, 3];
+const inputArray = [1, 2, 2, 3, 4, 4, 5, 5];
 mostFrequent(inputArray);
